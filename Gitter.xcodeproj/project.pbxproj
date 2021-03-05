@@ -13,8 +13,6 @@
 		37C6914A25F07F8600101AD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37C6914825F07F8600101AD4 /* Main.storyboard */; };
 		37C6914C25F07F8700101AD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37C6914B25F07F8700101AD4 /* Assets.xcassets */; };
 		37C6914F25F07F8700101AD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37C6914D25F07F8700101AD4 /* LaunchScreen.storyboard */; };
-		37C6915A25F07F8700101AD4 /* GitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6915925F07F8700101AD4 /* GitterTests.swift */; };
-		37C6916525F07F8700101AD4 /* GitterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6916425F07F8700101AD4 /* GitterUITests.swift */; };
 		37C6917725F0819900101AD4 /* GitHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6917625F0819900101AD4 /* GitHub.swift */; };
 		37C6917F25F1C92600101AD4 /* GitHubShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6917E25F1C92600101AD4 /* GitHubShapes.swift */; };
 		37C6918525F1E73900101AD4 /* RepoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6918425F1E73900101AD4 /* RepoVC.swift */; };
@@ -26,17 +24,11 @@
 		37CECD5C25F2216500C40859 /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD5B25F2216500C40859 /* Diff.swift */; };
 		37CECD6125F224DA00C40859 /* Resource+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD6025F224DA00C40859 /* Resource+Convenience.swift */; };
 		37CECD6625F2269100C40859 /* Diff+Myers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD6525F2269100C40859 /* Diff+Myers.swift */; };
+		37CECD6B25F2C71A00C40859 /* DiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD6A25F2C71A00C40859 /* DiffTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		37C6915625F07F8700101AD4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37C6913725F07F8600101AD4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 37C6913E25F07F8600101AD4;
-			remoteInfo = Gitter;
-		};
-		37C6916125F07F8700101AD4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 37C6913725F07F8600101AD4 /* Project object */;
 			proxyType = 1;
@@ -55,11 +47,7 @@
 		37C6914E25F07F8700101AD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37C6915025F07F8700101AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37C6915525F07F8700101AD4 /* GitterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		37C6915925F07F8700101AD4 /* GitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitterTests.swift; sourceTree = "<group>"; };
 		37C6915B25F07F8700101AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		37C6916025F07F8700101AD4 /* GitterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		37C6916425F07F8700101AD4 /* GitterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitterUITests.swift; sourceTree = "<group>"; };
-		37C6916625F07F8700101AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37C6917625F0819900101AD4 /* GitHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHub.swift; sourceTree = "<group>"; };
 		37C6917E25F1C92600101AD4 /* GitHubShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubShapes.swift; sourceTree = "<group>"; };
 		37C6918425F1E73900101AD4 /* RepoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoVC.swift; sourceTree = "<group>"; };
@@ -71,6 +59,7 @@
 		37CECD5B25F2216500C40859 /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		37CECD6025F224DA00C40859 /* Resource+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resource+Convenience.swift"; sourceTree = "<group>"; };
 		37CECD6525F2269100C40859 /* Diff+Myers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diff+Myers.swift"; sourceTree = "<group>"; };
+		37CECD6A25F2C71A00C40859 /* DiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,13 +77,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		37C6915D25F07F8700101AD4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -103,7 +85,6 @@
 			children = (
 				37C6914125F07F8600101AD4 /* Gitter */,
 				37C6915825F07F8700101AD4 /* GitterTests */,
-				37C6916325F07F8700101AD4 /* GitterUITests */,
 				37C6914025F07F8600101AD4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,7 +94,6 @@
 			children = (
 				37C6913F25F07F8600101AD4 /* Gitter.app */,
 				37C6915525F07F8700101AD4 /* GitterTests.xctest */,
-				37C6916025F07F8700101AD4 /* GitterUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,19 +117,10 @@
 		37C6915825F07F8700101AD4 /* GitterTests */ = {
 			isa = PBXGroup;
 			children = (
-				37C6915925F07F8700101AD4 /* GitterTests.swift */,
 				37C6915B25F07F8700101AD4 /* Info.plist */,
+				37CECD6A25F2C71A00C40859 /* DiffTests.swift */,
 			);
 			path = GitterTests;
-			sourceTree = "<group>";
-		};
-		37C6916325F07F8700101AD4 /* GitterUITests */ = {
-			isa = PBXGroup;
-			children = (
-				37C6916425F07F8700101AD4 /* GitterUITests.swift */,
-				37C6916625F07F8700101AD4 /* Info.plist */,
-			);
-			path = GitterUITests;
 			sourceTree = "<group>";
 		};
 		37C6917525F0818900101AD4 /* GitHub */ = {
@@ -215,24 +186,6 @@
 			productReference = 37C6915525F07F8700101AD4 /* GitterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		37C6915F25F07F8700101AD4 /* GitterUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37C6916F25F07F8700101AD4 /* Build configuration list for PBXNativeTarget "GitterUITests" */;
-			buildPhases = (
-				37C6915C25F07F8700101AD4 /* Sources */,
-				37C6915D25F07F8700101AD4 /* Frameworks */,
-				37C6915E25F07F8700101AD4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				37C6916225F07F8700101AD4 /* PBXTargetDependency */,
-			);
-			name = GitterUITests;
-			productName = GitterUITests;
-			productReference = 37C6916025F07F8700101AD4 /* GitterUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -246,10 +199,6 @@
 						CreatedOnToolsVersion = 12.4;
 					};
 					37C6915425F07F8700101AD4 = {
-						CreatedOnToolsVersion = 12.4;
-						TestTargetID = 37C6913E25F07F8600101AD4;
-					};
-					37C6915F25F07F8700101AD4 = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 37C6913E25F07F8600101AD4;
 					};
@@ -270,7 +219,6 @@
 			targets = (
 				37C6913E25F07F8600101AD4 /* Gitter */,
 				37C6915425F07F8700101AD4 /* GitterTests */,
-				37C6915F25F07F8700101AD4 /* GitterUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -287,13 +235,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37C6915325F07F8700101AD4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37C6915E25F07F8700101AD4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -328,15 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37C6915A25F07F8700101AD4 /* GitterTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37C6915C25F07F8700101AD4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37C6916525F07F8700101AD4 /* GitterUITests.swift in Sources */,
+				37CECD6B25F2C71A00C40859 /* DiffTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,11 +280,6 @@
 			isa = PBXTargetDependency;
 			target = 37C6913E25F07F8600101AD4 /* Gitter */;
 			targetProxy = 37C6915625F07F8700101AD4 /* PBXContainerItemProxy */;
-		};
-		37C6916225F07F8700101AD4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 37C6913E25F07F8600101AD4 /* Gitter */;
-			targetProxy = 37C6916125F07F8700101AD4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -573,46 +501,6 @@
 			};
 			name = Release;
 		};
-		37C6917025F07F8700101AD4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A6A4AZKGNE;
-				INFOPLIST_FILE = GitterUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = gregfajen.GitterUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Gitter;
-			};
-			name = Debug;
-		};
-		37C6917125F07F8700101AD4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A6A4AZKGNE;
-				INFOPLIST_FILE = GitterUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = gregfajen.GitterUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Gitter;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -639,15 +527,6 @@
 			buildConfigurations = (
 				37C6916D25F07F8700101AD4 /* Debug */,
 				37C6916E25F07F8700101AD4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		37C6916F25F07F8700101AD4 /* Build configuration list for PBXNativeTarget "GitterUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				37C6917025F07F8700101AD4 /* Debug */,
-				37C6917125F07F8700101AD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

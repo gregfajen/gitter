@@ -23,23 +23,7 @@ struct MyersDiff {
     }
     
     static func diff(a: [String], b: [String]) -> [Change] {
-        let changes = backtrack(a: a, b: b).reversed().compactMap { move -> Change? in
-            
-            print(move)
-            
-//            let a_line = a[move.prev_x]
-//            let b_line = b[move.prev_y]
-            
-            if move.x == move.prev_x {
-                return .insert(targetLine: move.prev_y)
-            } else if move.y == move.prev_y {
-                return .remove(sourceLine: move.prev_x)
-            } else {
-                return .equal(sourceLine: move.prev_x, targetLine: move.prev_y)
-            }
-            
-            return nil
-        }
+        let changes = self.changes(a: a, b: b)
         
         print("source: \(a.joined(separator: ""))")
         print("target: \(b.joined(separator: ""))")
@@ -52,10 +36,52 @@ struct MyersDiff {
                 case .insert(let targetLine):
                     let line = b[targetLine]
                     print(" + \(line)")
-                case .equal(let sourceLine, _):
-                    let line = a[sourceLine]
-                    print("   \(line)")
+                case .equal(let sourceLines, _):
+                    for sourceLine in sourceLines {
+                        let line = a[sourceLine]
+                        print("   \(line)")
+                    }
             }
+        }
+        
+        return changes
+    }
+    
+    // temp function to get closer to desired form for unit testing
+    static func changes(a: [String], b: [String]) -> [Change] {
+        var changes = [Change]()
+        
+        for old in oldChanges(a: a, b: b) {
+            if case let .equal(sourceLines, targetLines) = changes.last,
+               case let .equal(nextSourceLine, nextTargetLine) = old {
+                changes.removeLast()
+                changes.append(Change.equal(sourceLines: sourceLines.lowerBound...nextSourceLine,
+                                            targetLines: targetLines.lowerBound...nextTargetLine))
+            } else {
+                changes.append(Change(old))
+            }
+        }
+        
+        return changes
+    }
+    
+    static func oldChanges(a: [String], b: [String]) -> [TempChange] {
+        let changes = backtrack(a: a, b: b).reversed().compactMap { move -> TempChange? in
+            
+            print(move)
+            
+            //            let a_line = a[move.prev_x]
+            //            let b_line = b[move.prev_y]
+            
+            if move.x == move.prev_x {
+                return .insert(targetLine: move.prev_y)
+            } else if move.y == move.prev_y {
+                return .remove(sourceLine: move.prev_x)
+            } else {
+                return .equal(sourceLine: move.prev_x, targetLine: move.prev_y)
+            }
+            
+            return nil
         }
         
         return changes
@@ -64,10 +90,28 @@ struct MyersDiff {
     enum Change {
         case remove(sourceLine: Int)
         case insert(targetLine: Int)
+        case equal(sourceLines: ClosedRange<Int>, targetLines: ClosedRange<Int>)
+        
+        init(_ old: TempChange) {
+            switch old {
+                case .remove(let sourceLine):
+                    self = .remove(sourceLine: sourceLine)
+                case .insert(let targetLine):
+                    self = .insert(targetLine: targetLine)
+                case .equal(let sourceLine, let targetLine):
+                    self = .equal(sourceLines: sourceLine...sourceLine,
+                                  targetLines: targetLine...targetLine)
+            }
+        }
+    }
+    
+    enum TempChange {
+        case remove(sourceLine: Int)
+        case insert(targetLine: Int)
         case equal(sourceLine: Int, targetLine: Int)
     }
     
-    struct Thing: CustomDebugStringConvertible {
+    struct TempMove: CustomDebugStringConvertible {
         let prev_x, prev_y, x, y: Int
         
         var debugDescription: String {
@@ -75,12 +119,12 @@ struct MyersDiff {
         }
     }
     
-    static func backtrack(a: [String], b: [String]) -> [Thing] {
+    static func backtrack(a: [String], b: [String]) -> [TempMove] {
         let traces = self.traces(a: a, b: b)
         var x = a.count
         var y = b.count
         
-        var moves = [Thing]()
+        var moves = [TempMove]()
         
         for (d, V) in traces.enumerated().reversed() {
             let k = x - y
@@ -96,18 +140,18 @@ struct MyersDiff {
             let prev_y = prev_x - prev_k
             
             while x > prev_x, y > prev_y {
-                let thing = Thing(prev_x: x - 1, prev_y: y - 1, x: x, y: y)
-                print(thing)
-                moves.append(thing)
+                let move = TempMove(prev_x: x - 1, prev_y: y - 1, x: x, y: y)
+                print(move)
+                moves.append(move)
 //            yield x - 1, y - 1, x, y
                     x -= 1
                     y -= 1
             }
             
             if d > 0 {
-                let thing = Thing(prev_x: prev_x, prev_y: prev_y, x: x, y: y)
-                print(thing)
-                moves.append(thing)
+                let move = TempMove(prev_x: prev_x, prev_y: prev_y, x: x, y: y)
+                print(move)
+                moves.append(move)
             }
             
             x = prev_x
