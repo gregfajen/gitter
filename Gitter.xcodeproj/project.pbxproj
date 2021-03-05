@@ -22,6 +22,10 @@
 		37C6919225F1E8D600101AD4 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6919125F1E8D600101AD4 /* Repo.swift */; };
 		37C6919725F1F1A800101AD4 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6919625F1F1A800101AD4 /* Pull.swift */; };
 		37CECD5225F1FB0E00C40859 /* PullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD5125F1FB0E00C40859 /* PullCell.swift */; };
+		37CECD5725F2116C00C40859 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD5625F2116C00C40859 /* File.swift */; };
+		37CECD5C25F2216500C40859 /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD5B25F2216500C40859 /* Diff.swift */; };
+		37CECD6125F224DA00C40859 /* Resource+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD6025F224DA00C40859 /* Resource+Convenience.swift */; };
+		37CECD6625F2269100C40859 /* Diff+Myers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD6525F2269100C40859 /* Diff+Myers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +67,10 @@
 		37C6919125F1E8D600101AD4 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		37C6919625F1F1A800101AD4 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
 		37CECD5125F1FB0E00C40859 /* PullCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullCell.swift; sourceTree = "<group>"; };
+		37CECD5625F2116C00C40859 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		37CECD5B25F2216500C40859 /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
+		37CECD6025F224DA00C40859 /* Resource+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resource+Convenience.swift"; sourceTree = "<group>"; };
+		37CECD6525F2269100C40859 /* Diff+Myers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diff+Myers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +158,7 @@
 				37C6917625F0819900101AD4 /* GitHub.swift */,
 				37C6917E25F1C92600101AD4 /* GitHubShapes.swift */,
 				37C6918C25F1E77900101AD4 /* Resource.swift */,
+				37CECD6025F224DA00C40859 /* Resource+Convenience.swift */,
 			);
 			path = GitHub;
 			sourceTree = "<group>";
@@ -161,6 +170,9 @@
 				37C6919125F1E8D600101AD4 /* Repo.swift */,
 				37C6919625F1F1A800101AD4 /* Pull.swift */,
 				37CECD5125F1FB0E00C40859 /* PullCell.swift */,
+				37CECD5625F2116C00C40859 /* File.swift */,
+				37CECD5B25F2216500C40859 /* Diff.swift */,
+				37CECD6525F2269100C40859 /* Diff+Myers.swift */,
 			);
 			path = "Repo Listing";
 			sourceTree = "<group>";
@@ -296,14 +308,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				37C6918525F1E73900101AD4 /* RepoVC.swift in Sources */,
+				37CECD6125F224DA00C40859 /* Resource+Convenience.swift in Sources */,
 				37C6914725F07F8600101AD4 /* ViewController.swift in Sources */,
 				37C6914325F07F8600101AD4 /* AppDelegate.swift in Sources */,
 				37C6919225F1E8D600101AD4 /* Repo.swift in Sources */,
 				37C6919725F1F1A800101AD4 /* Pull.swift in Sources */,
 				37C6917F25F1C92600101AD4 /* GitHubShapes.swift in Sources */,
+				37CECD6625F2269100C40859 /* Diff+Myers.swift in Sources */,
+				37CECD5C25F2216500C40859 /* Diff.swift in Sources */,
 				37CECD5225F1FB0E00C40859 /* PullCell.swift in Sources */,
 				37C6917725F0819900101AD4 /* GitHub.swift in Sources */,
 				37C6914525F07F8600101AD4 /* SceneDelegate.swift in Sources */,
+				37CECD5725F2116C00C40859 /* File.swift in Sources */,
 				37C6918D25F1E77900101AD4 /* Resource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

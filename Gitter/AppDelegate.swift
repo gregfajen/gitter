@@ -15,6 +15,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+//        let before = """
+//        a
+//        b
+//        c
+//        """
+//
+//        let after = """
+//        a
+//        c
+//        f
+//        """
+        
+        let before = """
+        A
+        B
+        C
+        A
+        B
+        B
+        A
+        """
+        
+        let after = """
+        C
+        B
+        A
+        B
+        A
+        C
+        """
+        
+//        let after = """
+//        x
+//        y
+//        z
+//        """
+        
+        let diff = Diff(before: before, after: after)
+        print(diff.diff)
+        print("")
+        
 //        let vc = RepoVC()
 //        vc.repoResource.whenComplete { result in
 //            print(result)

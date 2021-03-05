@@ -18,8 +18,8 @@ class PullCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.textLabel?.text = pull?.shape.title
-        self.detailTextLabel?.text = pull?.shape.body
+        textLabel?.text = pull?.shape.title
+        detailTextLabel?.text = pull?.shape.body
     }
     
 }

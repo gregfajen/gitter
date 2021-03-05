@@ -15,9 +15,9 @@ class RepoVC: UITableViewController {
     var pulls: [Pull] { repo?.pulls.value ?? [] }
     
     override func viewDidLoad() {
-        repoResource.pulls.whenSuccess { pulls in
-            print(pulls.map(\.shape).map(\.state))
+        repoResource.pulls.whenSuccess { _ in
             self.tableView.reloadData()
+            self.tempStuff()
         }
     }
     
@@ -30,6 +30,25 @@ class RepoVC: UITableViewController {
         cell.pull = pulls[indexPath.row]
         
         return cell
+    }
+    
+    func tempStuff() {
+        let pull = pulls[1]
+        pull.filesResource.whenComplete { result in
+            self.tempStuff2(result.success!)
+        }
+    }
+    
+    func tempStuff2(_ files: [File]) {
+        let file = files.first!
+        
+        file.diffResource.whenComplete { result in
+            print(result)
+            print("")
+        }
+        
+        print(file)
+        print("")
     }
     
 }

@@ -9,11 +9,17 @@ import Foundation
 
 class Pull {
     
+    let repo: Repo
     let shape: GitPullShape
     
-    init(_ shape: GitPullShape) {
+    lazy var filesResource = FilesResource(self)
+    
+    init(repo: Repo, shape: GitPullShape) {
+        self.repo = repo
         self.shape = shape
     }
+    
+    var number: Int { shape.number }
     
 }
 
@@ -28,7 +34,7 @@ extension PullsResource {
             let pulls = result.map { response in
                 response
                     .decoding([GitPullShape].self)
-                    .map { Pull($0) }
+                    .map { Pull(repo: repo, shape: $0) }
             }
             
             self.complete(with: pulls)
