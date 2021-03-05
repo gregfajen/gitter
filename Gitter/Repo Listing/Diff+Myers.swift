@@ -66,25 +66,7 @@ struct MyersDiff {
     }
     
     static func oldChanges(a: [String], b: [String]) -> [TempChange] {
-        let changes = backtrack(a: a, b: b).reversed().compactMap { move -> TempChange? in
-            
-            print(move)
-            
-            //            let a_line = a[move.prev_x]
-            //            let b_line = b[move.prev_y]
-            
-            if move.x == move.prev_x {
-                return .insert(targetLine: move.prev_y)
-            } else if move.y == move.prev_y {
-                return .remove(sourceLine: move.prev_x)
-            } else {
-                return .equal(sourceLine: move.prev_x, targetLine: move.prev_y)
-            }
-            
-            return nil
-        }
-        
-        return changes
+        backtrack(a, b)
     }
     
     enum Change: Equatable {
@@ -117,16 +99,28 @@ struct MyersDiff {
         var debugDescription: String {
             "(\(prev_x), \(prev_y)) -> (\(x), \(y))"
         }
+        
+        var asChange: TempChange {
+            let move = self
+            if move.x == move.prev_x {
+                return .insert(targetLine: move.prev_y)
+            } else if move.y == move.prev_y {
+                return .remove(sourceLine: move.prev_x)
+            } else {
+                return .equal(sourceLine: move.prev_x, targetLine: move.prev_y)
+            }
+        }
+        
     }
     
-    static func backtrack(a: [String], b: [String]) -> [TempMove] {
-        let traces = self.traces(a: a, b: b)
+    static func backtrack(_ a: [String], _ b: [String]) -> [TempChange] {
+        let trace = getTrace(a, b)
         var x = a.count
         var y = b.count
         
-        var moves = [TempMove]()
+        var changes = [TempChange]()
         
-        for (d, V) in traces.enumerated().reversed() {
+        for (d, V) in trace.lazy.enumerated().reversed() {
             let k = x - y
             
             let prev_k: Int
@@ -142,7 +136,7 @@ struct MyersDiff {
             while x > prev_x, y > prev_y {
                 let move = TempMove(prev_x: x - 1, prev_y: y - 1, x: x, y: y)
                 print(move)
-                moves.append(move)
+                changes.append(move.asChange)
 //            yield x - 1, y - 1, x, y
                     x -= 1
                     y -= 1
@@ -151,71 +145,46 @@ struct MyersDiff {
             if d > 0 {
                 let move = TempMove(prev_x: prev_x, prev_y: prev_y, x: x, y: y)
                 print(move)
-                moves.append(move)
+                changes.append(move.asChange)
             }
             
             x = prev_x
             y = prev_y
         }
         
-        return moves
+        return changes.reversed()
     }
     
-    static func traces(a: [String], b: [String]) -> [OffsetArray<Int>] {
+    static func getTrace(_ a: [String], _ b: [String]) -> [OffsetArray<Int>] {
         let N = a.count
         let M = b.count
         let MAX = N + M
         
-        let Z = 2 * min(N, M) + 2
-        
-        var V = OffsetArray(repeating: Int.min, range: -MAX...MAX)
-        var Vs = [OffsetArray<Int>]()
-        
-        V[1] = 0
+        var V = OffsetArray(repeating: 0, range: -MAX...MAX)
+        var trace = [OffsetArray<Int>]()
         
         for D in 0...MAX {
-            Vs.append(V)
+            trace.append(V)
             
             for k in stride(from: -D, through: D, by: 2) {
-                print("D: \(D), k: \(k)")
-                print("    V[\(k)]: \(V[k])")
                 var x: Int
-                if k == -D {
-                    print("    go right")
+                if k == -D || (k != D && V[k-1]<V[k+1]) {
                     x = V[k+1]
-                    precondition((x-k) >= 0)
-                } else if k == D {
-                    print("    go down")
-                    x = V[k-1]+1
-                    precondition((x-k) >= 0)
                 } else {
-                    if V[k-1]<V[k+1] {
-                        print("    go right")
-                        x = V[k+1]
-                        precondition((x-k) >= 0)
-                    } else {
-                        print("    go down")
-                        x = V[k-1]+1
-                        precondition((x-k) >= 0)
-                    }
+                    x = V[k-1]+1
                 }
                 
                 var y = x - k
                 
-                print("    (x, y): (\(x), \(y))")
-                
                 while x < N, y < M, a[x] == b[y] {
-                    print("    diagonal (a[\(x)] = b[\(y)] = \(a[x]))")
                     x += 1
                     y += 1
                 }
                 
                 V[k] = x
-                print("    V[\(k)] := \(x)")
                 
                 if x >= N, y >= M {
-                    // Length of an SES is D
-                    return Vs
+                    return trace
                 }
             }
         }
@@ -227,7 +196,7 @@ struct MyersDiff {
 }
 
 // convenience array which allows negative indices
-struct OffsetArray<Element>: Sequence {
+struct OffsetArray<Element> {
     
     let offset: Int
     var array: [Element]
@@ -240,10 +209,6 @@ struct OffsetArray<Element>: Sequence {
     subscript(i: Int) -> Element {
         get { array[i+offset] }
         set { array[i+offset] = newValue }
-    }
-    
-    __consuming func makeIterator() -> Array<Element>.Iterator {
-        array.makeIterator()
     }
     
 }
