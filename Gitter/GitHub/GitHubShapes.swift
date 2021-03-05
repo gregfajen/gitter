@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct GitRepoShape: Codable {
+    
+    let name: String
+    let description: String
+    let full_name: String
+    
+}
+
 struct GitPullShape: Codable {
     
     let number: Int

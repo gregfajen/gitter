@@ -17,6 +17,11 @@
 		37C6916525F07F8700101AD4 /* GitterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6916425F07F8700101AD4 /* GitterUITests.swift */; };
 		37C6917725F0819900101AD4 /* GitHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6917625F0819900101AD4 /* GitHub.swift */; };
 		37C6917F25F1C92600101AD4 /* GitHubShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6917E25F1C92600101AD4 /* GitHubShapes.swift */; };
+		37C6918525F1E73900101AD4 /* RepoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6918425F1E73900101AD4 /* RepoVC.swift */; };
+		37C6918D25F1E77900101AD4 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6918C25F1E77900101AD4 /* Resource.swift */; };
+		37C6919225F1E8D600101AD4 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6919125F1E8D600101AD4 /* Repo.swift */; };
+		37C6919725F1F1A800101AD4 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6919625F1F1A800101AD4 /* Pull.swift */; };
+		37CECD5225F1FB0E00C40859 /* PullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD5125F1FB0E00C40859 /* PullCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,11 @@
 		37C6916625F07F8700101AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37C6917625F0819900101AD4 /* GitHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHub.swift; sourceTree = "<group>"; };
 		37C6917E25F1C92600101AD4 /* GitHubShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubShapes.swift; sourceTree = "<group>"; };
+		37C6918425F1E73900101AD4 /* RepoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoVC.swift; sourceTree = "<group>"; };
+		37C6918C25F1E77900101AD4 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		37C6919125F1E8D600101AD4 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
+		37C6919625F1F1A800101AD4 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
+		37CECD5125F1FB0E00C40859 /* PullCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +113,7 @@
 		37C6914125F07F8600101AD4 /* Gitter */ = {
 			isa = PBXGroup;
 			children = (
+				37C6918325F1E70D00101AD4 /* Repo Listing */,
 				37C6917525F0818900101AD4 /* GitHub */,
 				37C6914225F07F8600101AD4 /* AppDelegate.swift */,
 				37C6914425F07F8600101AD4 /* SceneDelegate.swift */,
@@ -138,8 +149,20 @@
 			children = (
 				37C6917625F0819900101AD4 /* GitHub.swift */,
 				37C6917E25F1C92600101AD4 /* GitHubShapes.swift */,
+				37C6918C25F1E77900101AD4 /* Resource.swift */,
 			);
 			path = GitHub;
+			sourceTree = "<group>";
+		};
+		37C6918325F1E70D00101AD4 /* Repo Listing */ = {
+			isa = PBXGroup;
+			children = (
+				37C6918425F1E73900101AD4 /* RepoVC.swift */,
+				37C6919125F1E8D600101AD4 /* Repo.swift */,
+				37C6919625F1F1A800101AD4 /* Pull.swift */,
+				37CECD5125F1FB0E00C40859 /* PullCell.swift */,
+			);
+			path = "Repo Listing";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,11 +295,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C6918525F1E73900101AD4 /* RepoVC.swift in Sources */,
 				37C6914725F07F8600101AD4 /* ViewController.swift in Sources */,
 				37C6914325F07F8600101AD4 /* AppDelegate.swift in Sources */,
+				37C6919225F1E8D600101AD4 /* Repo.swift in Sources */,
+				37C6919725F1F1A800101AD4 /* Pull.swift in Sources */,
 				37C6917F25F1C92600101AD4 /* GitHubShapes.swift in Sources */,
+				37CECD5225F1FB0E00C40859 /* PullCell.swift in Sources */,
 				37C6917725F0819900101AD4 /* GitHub.swift in Sources */,
 				37C6914525F07F8600101AD4 /* SceneDelegate.swift in Sources */,
+				37C6918D25F1E77900101AD4 /* Resource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

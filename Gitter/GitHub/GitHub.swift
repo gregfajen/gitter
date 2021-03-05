@@ -23,17 +23,20 @@ struct GitHub {
             print(String(describing: error))
             print("")
             
-            if let error = error {
-                completion(.failure(error))
-                return
+            DispatchQueue.main.async {
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let data = data, let response = response else {
+                    #warning("fix me")
+                    fatalError()
+                }
+                
+                completion(.success(Response(data: data, urlResponse: response)))
             }
             
-            guard let data = data, let response = response else {
-                #warning("fix me")
-                fatalError()
-            }
-            
-            completion(.success(Response(data: data, urlResponse: response)))
         }
         
         task.resume()
@@ -56,7 +59,11 @@ extension GitHub {
     
     func getRepo() {
         get(urlString: "https://api.github.com/repos/octocat/hello-world") { result in
-            print(result)
+            let repo = result.success!.decoding(GitRepoShape.self)
+            
+            let json = try! JSONSerialization.jsonObject(with: result.success!.data, options: []) as! [String:Any]
+            print(json)
+            print("")
         }
     }
     
@@ -128,20 +135,6 @@ struct Response {
             print(error)
             #warning("fix me")
             fatalError()
-        }
-    }
-    
-}
-
-extension Result {
-    
-    var success: Success? {
-        switch self {
-            case .success(let success):
-                return success
-                
-            case .failure:
-                return nil
         }
     }
     
