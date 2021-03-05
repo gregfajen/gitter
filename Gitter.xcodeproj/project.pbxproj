@@ -16,6 +16,7 @@
 		37C6915A25F07F8700101AD4 /* GitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6915925F07F8700101AD4 /* GitterTests.swift */; };
 		37C6916525F07F8700101AD4 /* GitterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6916425F07F8700101AD4 /* GitterUITests.swift */; };
 		37C6917725F0819900101AD4 /* GitHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6917625F0819900101AD4 /* GitHub.swift */; };
+		37C6917F25F1C92600101AD4 /* GitHubShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6917E25F1C92600101AD4 /* GitHubShapes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		37C6916425F07F8700101AD4 /* GitterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitterUITests.swift; sourceTree = "<group>"; };
 		37C6916625F07F8700101AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37C6917625F0819900101AD4 /* GitHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHub.swift; sourceTree = "<group>"; };
+		37C6917E25F1C92600101AD4 /* GitHubShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubShapes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				37C6917625F0819900101AD4 /* GitHub.swift */,
+				37C6917E25F1C92600101AD4 /* GitHubShapes.swift */,
 			);
 			path = GitHub;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			files = (
 				37C6914725F07F8600101AD4 /* ViewController.swift in Sources */,
 				37C6914325F07F8600101AD4 /* AppDelegate.swift in Sources */,
+				37C6917F25F1C92600101AD4 /* GitHubShapes.swift in Sources */,
 				37C6917725F0819900101AD4 /* GitHub.swift in Sources */,
 				37C6914525F07F8600101AD4 /* SceneDelegate.swift in Sources */,
 			);

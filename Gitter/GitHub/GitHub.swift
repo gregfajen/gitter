@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 #warning("temporary, don't hardcode long term")
 let token = "2e3407cc33caffcbd5a093535ac42d1244b779be"
@@ -50,19 +49,24 @@ struct GitHub {
         get(url: url, completion: completion)
     }
     
+}
+
+@available(*, deprecated)
+extension GitHub {
+    
     func getRepo() {
         get(urlString: "https://api.github.com/repos/octocat/hello-world") { result in
             print(result)
         }
     }
     
-    func getPulls(completion: @escaping (Result<[GitPull], Error>) -> ()) {
+    func getPulls(completion: @escaping (Result<[GitPullShape], Error>) -> ()) {
         get(urlString: "https://api.github.com/repos/octocat/hello-world/pulls") { result in
             print(result)
             switch result {
                 case .success(let response):
-                    let pulls = response.decoding([GitPull].self)
-//                    let json = try! JSONSerialization.jsonObject(with: response.data, options: []) as! [[String:Any]]
+                    let pulls = response.decoding([GitPullShape].self)
+                    //                    let json = try! JSONSerialization.jsonObject(with: response.data, options: []) as! [[String:Any]]
                     completion(.success(pulls))
                     
                 case .failure:
@@ -72,7 +76,7 @@ struct GitHub {
         }
     }
     
-    func tempLoadFile(_ file: GitFile, commit: String) -> String {
+    func tempLoadFile(_ file: GitFileShape, commit: String) -> String {
         let urlString = "https://api.github.com/repos/octocat/hello-world/contents/\(file.filename)?ref=\(commit)"
         let data = try! Data(contentsOf: URL(string: urlString)!, options: [])
         let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
@@ -92,7 +96,7 @@ struct GitHub {
                 let response = result.success!
                 let json = try! JSONSerialization.jsonObject(with: response.data, options: []) as! [[String:Any]]
                 
-                let files = response.decoding([GitFile].self)
+                let files = response.decoding([GitFileShape].self)
                 let file = files.first!
                 
                 let before = tempLoadFile(file, commit: base)
@@ -140,52 +144,5 @@ extension Result {
                 return nil
         }
     }
-    
-}
-
-struct GitPull: Codable {
-    
-    let number: Int
-    let state: String
-    let title: String
-    let body: String
-    let labels: [GitLabel]
-    
-    let user: GitUser
-    let head: GitCommit
-    let base: GitCommit
-    
-}
-
-struct GitCommit: Codable {
-    
-    let label: String
-    let ref: String
-    let sha: String
-    
-}
-
-struct GitLabel: Codable {
-    
-    let name: String
-    let color: String
-    
-}
-
-struct GitUser: Codable {
-    
-    let login: String
-    let avatar_url: String
-    
-}
-
-struct GitFile: Codable {
-    
-    let sha: String
-    let filename: String
-    let status: String
-    let additions: Int
-    let deletions: Int
-    let changes: Int
     
 }
