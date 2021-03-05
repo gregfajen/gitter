@@ -87,7 +87,7 @@ struct MyersDiff {
         return changes
     }
     
-    enum Change {
+    enum Change: Equatable {
         case remove(sourceLine: Int)
         case insert(targetLine: Int)
         case equal(sourceLines: ClosedRange<Int>, targetLines: ClosedRange<Int>)
