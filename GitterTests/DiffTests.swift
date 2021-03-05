@@ -23,7 +23,7 @@ class DiffTests: XCTestCase {
         c
         """
         
-        let changes = diff(old: old, new: new)
+        let changes = diff(old, new)
         
         XCTAssert(changes.count == 1)
         
@@ -43,7 +43,7 @@ class DiffTests: XCTestCase {
         
         let new = ""
         
-        let changes = diff(old: old, new: new)
+        let changes = diff(old, new)
         
         XCTAssert(changes.count == 1)
         
@@ -62,7 +62,7 @@ class DiffTests: XCTestCase {
         a
         """
         
-        let changes = diff(old: old, new: new)
+        let changes = diff(old, new)
         
         XCTAssert(changes.count == 1)
         
@@ -95,7 +95,7 @@ class DiffTests: XCTestCase {
         C
         """
         
-        let result = diff(old: old, new: new)
+        let result = diff(old, new)
         let expected: [MyersDiff.Change] = [
             .remove(sourceLine: 0),
             .remove(sourceLine: 1),
@@ -110,7 +110,7 @@ class DiffTests: XCTestCase {
         assertEqual(result, expected)
     }
     
-    func diff(old: String, new: String) -> [MyersDiff.Change] {
+    func diff(_ old: String, _ new: String) -> [MyersDiff.Change] {
         func asLines(_ string: String) -> [String] {
             if string.isEmpty {
                 return []
@@ -119,8 +119,8 @@ class DiffTests: XCTestCase {
             }
         }
         
-        return MyersDiff.diff(a: asLines(old),
-                              b: asLines(new))
+        return MyersDiff.diff(asLines(old),
+                              asLines(new))
     }
     
     func assertEqual(_ result: [MyersDiff.Change], _ expected: [MyersDiff.Change]) {
