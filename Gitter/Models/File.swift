@@ -12,8 +12,8 @@ class File {
     let pull: Pull
     let shape: GitFileShape
     
-    lazy var beforeResource: Resource<String> = resource(for: pull.shape.base.sha)
-    lazy var afterResource: Resource<String>  = resource(for: pull.shape.head.sha)
+    lazy var beforeResource: Resource<[String]> = resource(for: pull.shape.base.sha)
+    lazy var afterResource: Resource<[String]>  = resource(for: pull.shape.head.sha)
     lazy var diffResource = beforeResource.and(afterResource).map(Diff.init)
     
     init(pull: Pull, shape: GitFileShape) {
@@ -23,8 +23,8 @@ class File {
     
     var filename: String { shape.filename }
     
-    func resource(for commit: String) -> Resource<String> {
-        let resource = Resource<String>()
+    func resource(for commit: String) -> Resource<[String]> {
+        let resource = Resource<[String]>()
         let urlString = "https://api.github.com/repos/\(pull.repo.fullName)/contents/\(filename)?ref=\(commit)"
         
         GitHub().get(urlString: urlString) { result in
@@ -33,11 +33,11 @@ class File {
                     resource.succeed {
                         let json = try JSONSerialization.jsonObject(with: response.data, options: []) as! [String:Any]
                         guard let content = (json["content"] as? String)?.replacingOccurrences(of: "\n", with: "") else {
-                            return ""
+                            return []
                         }
                         let decoded = Data(base64Encoded: content)!
                         let string = String(data: decoded, encoding: .utf8)!
-                        return string
+                        return string.components(separatedBy: .newlines)
                     }
                     
                 case .failure(let error):

@@ -21,7 +21,24 @@ class DiffVC: UITableViewController {
     }
     
     func printDiff(_ diff: Diff) {
-        print(diff.diff)
+        let old = diff.before
+        let new = diff.after
+        
+        for change in diff.diff {
+            switch change {
+                case .insert(let targetLine):
+                    let line = new[targetLine]
+                    print(" + \(line)")
+                case .remove(let sourceLine):
+                    let line = old[sourceLine]
+                    print(" - \(line)")
+                case .equal(let sourceLines, _):
+                    for sourceLine in sourceLines {
+                        let line = old[sourceLine]
+                        print("   \(line)")
+                    }
+            }
+        }
     }
     
 }

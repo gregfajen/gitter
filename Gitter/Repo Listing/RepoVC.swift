@@ -49,23 +49,4 @@ class RepoVC: UITableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-//    func tempStuff() {
-//        let pull = pulls[1]
-//        pull.filesResource.whenComplete { result in
-//            self.tempStuff2(result.success!)
-//        }
-//    }
-//
-//    func tempStuff2(_ files: [File]) {
-//        let file = files.first!
-//
-//        file.diffResource.whenComplete { result in
-//            print(result)
-//            print("")
-//        }
-//
-//        print(file)
-//        print("")
-//    }
-    
 }

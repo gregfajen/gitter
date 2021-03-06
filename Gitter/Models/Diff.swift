@@ -9,13 +9,12 @@ import Foundation
 
 class Diff {
     
-    let before: String
-    let after: String
+    let before: [String]
+    let after: [String]
     
-    lazy var diff = MyersDiff.diff(before.components(separatedBy: .newlines),
-                                   after.components(separatedBy: .newlines))
+    lazy var diff = MyersDiff.diff(before, after)
     
-    init(before: String, after: String) {
+    init(before: [String], after: [String]) {
         self.before = before
         self.after = after
     }
