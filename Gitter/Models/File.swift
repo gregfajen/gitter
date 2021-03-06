@@ -32,7 +32,9 @@ class File {
                 case .success(let response):
                     resource.succeed {
                         let json = try JSONSerialization.jsonObject(with: response.data, options: []) as! [String:Any]
-                        let content = (json["content"] as! String).replacingOccurrences(of: "\n", with: "")
+                        guard let content = (json["content"] as? String)?.replacingOccurrences(of: "\n", with: "") else {
+                            return ""
+                        }
                         let decoded = Data(base64Encoded: content)!
                         let string = String(data: decoded, encoding: .utf8)!
                         return string

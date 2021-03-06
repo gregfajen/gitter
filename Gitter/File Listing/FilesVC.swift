@@ -15,28 +15,12 @@ class FilesVC: UITableViewController {
     var files: [File] { filesResource.value ?? [] }
     
     override func viewWillAppear(_ animated: Bool) {
+        title = "Files"
+        
         filesResource.whenSuccess { _ in
             self.tableView.reloadData()
         }
     }
-    
-    override func viewDidLoad() {
-        title = "Files"
-    }
-    
-    
-    
-//    lazy var repoResource = RepoResource(fullName: "octocat/Hello-World")
-//    
-//    var repo: Repo? { repoResource.value }
-//    var pulls: [Pull] { repo?.pulls.value ?? [] }
-//    
-//    override func viewDidLoad() {
-//        repoResource.pulls.whenSuccess { _ in
-//            self.tableView.reloadData()
-//            self.tempStuff()
-//        }
-//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         files.count
@@ -47,6 +31,18 @@ class FilesVC: UITableViewController {
         cell.file = files[indexPath.row]
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        goToDiff(for: files[indexPath.item])
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func goToDiff(for file: File) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "DiffVC") as! DiffVC
+        vc.file = file
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
