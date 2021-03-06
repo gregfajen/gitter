@@ -31,13 +31,13 @@ extension PullsResource {
         self.init()
         
         GitHub().get(urlString: "https://api.github.com/repos/\(repo.fullName)/pulls") { result in
-            let pulls = result.map { response in
-                response
-                    .decoding([GitPullShape].self)
-                    .map { Pull(repo: repo, shape: $0) }
+            self.complete {
+                try result.map { response in
+                    try response
+                        .decoding([GitPullShape].self)
+                        .map { Pull(repo: repo, shape: $0) }
+                }
             }
-            
-            self.complete(with: pulls)
         }
     }
     

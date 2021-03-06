@@ -7,9 +7,11 @@
 
 import UIKit
 
+fileprivate let repoName = "magicalpanda/MagicalRecord"
+
 class RepoVC: UITableViewController {
     
-    lazy var repoResource = RepoResource(fullName: "octocat/Hello-World")
+    lazy var repoResource = RepoResource(fullName: repoName)
     
     var repo: Repo? { repoResource.value }
     var pulls: [Pull] { repo?.pulls.value ?? [] }

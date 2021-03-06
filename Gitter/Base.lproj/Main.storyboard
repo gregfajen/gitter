@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Pulls-->
+        <!--RepoVC-->
         <scene sceneID="TJ2-6S-GzE">
             <objects>
                 <tableViewController id="e3t-ne-LGi" customClass="RepoVC" customModule="Gitter" customModuleProvider="target" sceneMemberID="viewController">
@@ -46,7 +46,7 @@
                             <outlet property="delegate" destination="e3t-ne-LGi" id="VFa-73-17I"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pulls" id="4jc-En-xTm"/>
+                    <navigationItem key="navigationItem" id="4jc-En-xTm"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQn-UH-Uj1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -131,7 +131,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IK5-TO-MxP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-449" y="-1051"/>
+            <point key="canvasLocation" x="688" y="-378"/>
         </scene>
     </scenes>
     <resources>

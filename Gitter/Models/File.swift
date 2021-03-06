@@ -59,13 +59,13 @@ extension FilesResource {
         self.init()
         
         GitHub().get(urlString: "https://api.github.com/repos/\(pull.repo.fullName)/pulls/\(pull.number)/files") { result in
-            let result = result.map { response in
-                response
-                    .decoding([GitFileShape].self)
-                    .map { File(pull: pull, shape: $0) }
-            }
-            
-            self.complete(with: result)
+                self.complete {
+                    try result.map { response in
+                        try response
+                            .decoding([GitFileShape].self)
+                            .map { File(pull: pull, shape: $0) }
+                    }
+                }
         }
     }
     

@@ -33,8 +33,10 @@ extension RepoResource {
         GitHub().get(urlString: "https://api.github.com/repos/\(fullName)") { result in
             switch result {
                 case .success(let response):
-                    let shape = response.decoding(GitRepoShape.self)
-                    self.succeed(with: Repo(shape))
+                    self.succeed {
+                        let shape = try response.decoding(GitRepoShape.self)
+                        return Repo(shape)
+                    }
                     
                 case .failure(let error):
                     self.fail(with: error)
