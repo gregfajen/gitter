@@ -15,9 +15,12 @@ class RepoVC: UITableViewController {
     var pulls: [Pull] { repo?.pulls.value ?? [] }
     
     override func viewDidLoad() {
+        repoResource.whenSuccess { repo in
+            self.title = repo.name
+        }
+        
         repoResource.pulls.whenSuccess { _ in
             self.tableView.reloadData()
-            self.tempStuff()
         }
     }
     
@@ -32,23 +35,35 @@ class RepoVC: UITableViewController {
         return cell
     }
     
-    func tempStuff() {
-        let pull = pulls[1]
-        pull.filesResource.whenComplete { result in
-            self.tempStuff2(result.success!)
-        }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        goToFiles(for: pulls[indexPath.item])
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tempStuff2(_ files: [File]) {
-        let file = files.first!
-        
-        file.diffResource.whenComplete { result in
-            print(result)
-            print("")
-        }
-        
-        print(file)
-        print("")
+    func goToFiles(for pull: Pull) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "FilesVC") as! FilesVC
+        vc.pull = pull
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
+//    func tempStuff() {
+//        let pull = pulls[1]
+//        pull.filesResource.whenComplete { result in
+//            self.tempStuff2(result.success!)
+//        }
+//    }
+//
+//    func tempStuff2(_ files: [File]) {
+//        let file = files.first!
+//
+//        file.diffResource.whenComplete { result in
+//            print(result)
+//            print("")
+//        }
+//
+//        print(file)
+//        print("")
+//    }
     
 }
