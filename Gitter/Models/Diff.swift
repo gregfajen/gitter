@@ -13,6 +13,7 @@ class Diff {
     let after: [String]
     
     lazy var diff = MyersDiff.diff(before, after)
+    lazy var hunks = diff.hunked()
     
     init(before: [String], after: [String]) {
         self.before = before
