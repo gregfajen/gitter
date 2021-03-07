@@ -32,6 +32,11 @@
 		37CECD6125F224DA00C40859 /* Resource+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD6025F224DA00C40859 /* Resource+Convenience.swift */; };
 		37CECD6625F2269100C40859 /* MyersDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD6525F2269100C40859 /* MyersDiff.swift */; };
 		37CECD6B25F2C71A00C40859 /* DiffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CECD6A25F2C71A00C40859 /* DiffTests.swift */; };
+		37DE140A25F4748700CD7397 /* HunkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE140925F4748700CD7397 /* HunkTests.swift */; };
+		37DE140E25F4781200CD7397 /* DiffSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE140D25F4781200CD7397 /* DiffSection.swift */; };
+		37DE141425F4787A00CD7397 /* ChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141325F4787A00CD7397 /* ChangeView.swift */; };
+		37DE141825F478B300CD7397 /* DiffSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141725F478B300CD7397 /* DiffSectionTests.swift */; };
+		37DE141C25F47A7300CD7397 /* ResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141B25F47A7300CD7397 /* ResourceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +79,11 @@
 		37CECD6025F224DA00C40859 /* Resource+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resource+Convenience.swift"; sourceTree = "<group>"; };
 		37CECD6525F2269100C40859 /* MyersDiff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyersDiff.swift; sourceTree = "<group>"; };
 		37CECD6A25F2C71A00C40859 /* DiffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTests.swift; sourceTree = "<group>"; };
+		37DE140925F4748700CD7397 /* HunkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunkTests.swift; sourceTree = "<group>"; };
+		37DE140D25F4781200CD7397 /* DiffSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffSection.swift; sourceTree = "<group>"; };
+		37DE141325F4787A00CD7397 /* ChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeView.swift; sourceTree = "<group>"; };
+		37DE141725F478B300CD7397 /* DiffSectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffSectionTests.swift; sourceTree = "<group>"; };
+		37DE141B25F47A7300CD7397 /* ResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +131,10 @@
 			isa = PBXGroup;
 			children = (
 				37A9421625F3F6C200F6B4BE /* DiffVC.swift */,
-				37A9422825F410A500F6B4BE /* ChangeCell.swift */,
 				37A9423025F443A300F6B4BE /* HunkHeaderView.swift */,
+				37A9422825F410A500F6B4BE /* ChangeCell.swift */,
+				37DE141325F4787A00CD7397 /* ChangeView.swift */,
+				37DE140D25F4781200CD7397 /* DiffSection.swift */,
 			);
 			path = "Diff Detail";
 			sourceTree = "<group>";
@@ -169,6 +181,9 @@
 			children = (
 				37C6915B25F07F8700101AD4 /* Info.plist */,
 				37CECD6A25F2C71A00C40859 /* DiffTests.swift */,
+				37DE140925F4748700CD7397 /* HunkTests.swift */,
+				37DE141725F478B300CD7397 /* DiffSectionTests.swift */,
+				37DE141B25F47A7300CD7397 /* ResourceTests.swift */,
 			);
 			path = GitterTests;
 			sourceTree = "<group>";
@@ -301,7 +316,9 @@
 				37C6919225F1E8D600101AD4 /* Repo.swift in Sources */,
 				37C6919725F1F1A800101AD4 /* Pull.swift in Sources */,
 				37A9422925F410A500F6B4BE /* ChangeCell.swift in Sources */,
+				37DE140E25F4781200CD7397 /* DiffSection.swift in Sources */,
 				37A9420E25F3EFDE00F6B4BE /* FilesVC.swift in Sources */,
+				37DE141425F4787A00CD7397 /* ChangeView.swift in Sources */,
 				37C6917F25F1C92600101AD4 /* GitHubShapes.swift in Sources */,
 				37A9421725F3F6C200F6B4BE /* DiffVC.swift in Sources */,
 				37CECD6625F2269100C40859 /* MyersDiff.swift in Sources */,
@@ -322,6 +339,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				37CECD6B25F2C71A00C40859 /* DiffTests.swift in Sources */,
+				37DE141C25F47A7300CD7397 /* ResourceTests.swift in Sources */,
+				37DE141825F478B300CD7397 /* DiffSectionTests.swift in Sources */,
+				37DE140A25F4748700CD7397 /* HunkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

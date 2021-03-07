@@ -15,10 +15,6 @@ struct Hunk {
         self.changes = Array(changes)
     }
     
-    var lineCount: Int {
-        changes.map(\.lineCount).reduce(0,+)
-    }
-    
     mutating func trimContext(_ linesOfContext: Int) {
         if case let .equal(sourceLines, targetLines) = changes.first {
             if sourceLines.count > linesOfContext {
@@ -85,17 +81,6 @@ extension Collection {
         try zip(self, indices) // `enumerated()` returns `Int`s, not `Index`es
             .filter { try predicate($0.0) }
             .map(\.1)
-    }
-    
-}
-
-extension MyersDiff.Change {
-    
-    var lineCount: Int {
-        switch self {
-            case .insert, .remove: return 1
-            case .equal(let sourceLines, _): return sourceLines.count
-        }
     }
     
 }

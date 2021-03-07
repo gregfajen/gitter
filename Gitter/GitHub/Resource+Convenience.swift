@@ -166,3 +166,16 @@ extension Optional {
     }
     
 }
+
+extension Resource.Status: Equatable where Value: Equatable {
+    
+    static func == (lhs: Resource<Value>.Status, rhs: Resource<Value>.Status) -> Bool {
+        switch (lhs, rhs) {
+            case (.loading, .loading): return true
+            case let (.loaded(l), .loaded(r)): return l == r
+            case (.error, .error): return true
+            default: return false
+        }
+    }
+    
+}
