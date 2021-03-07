@@ -20,6 +20,8 @@ class FilesVC: UITableViewController {
         filesResource.whenSuccess { _ in
             self.tableView.reloadData()
         }
+        
+        filesResource.whenFailure(presentErrorAlert)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

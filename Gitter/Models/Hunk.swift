@@ -48,6 +48,24 @@ struct Hunk {
         }
     }
     
+    var linesAdded: Int {
+        changes.reduce(into: 0) {
+            switch $1 {
+                case .insert: $0 += 1
+                default: break
+            }
+        }
+    }
+    
+    var linesRemoved: Int {
+        changes.reduce(into: 0) {
+            switch $1 {
+                case .remove: $0 += 1
+                default: break
+            }
+        }
+    }
+    
 }
 
 extension Array where Element == MyersDiff.Change {

@@ -44,7 +44,8 @@ struct MyersDiff {
     ///  - Returns: A list of `Changes` representing a diff that describes how to transform a
     ///             source sequence (`old`) into a target sequence (`new`).
     static func diff<Element: Equatable>(_ old: [Element], _ new: [Element]) -> [Change] {
-        backtrack(old, new).asChanges
+        if old.isEmpty, new.isEmpty { return [] }
+        return backtrack(old, new).asChanges
     }
     
     /// Goes backwards through the endpoints generated in `getTrace` to produce a

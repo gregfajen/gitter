@@ -7,7 +7,18 @@
 
 import Foundation
 
-enum GitterError: Error {
+enum GitterError: LocalizedError {
+    
+    case serverError(Int, String)
     case missingResponse
     case invalidURL
+    
+    var errorDescription: String? {
+        switch self {
+            case .invalidURL: return "Invalid URL"
+            case .missingResponse: return "Something went wrong..."
+            case .serverError(let code, let message):  return "\(message)\n(Status Code: \(code))"
+        }
+    }
+    
 }

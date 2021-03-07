@@ -7,15 +7,17 @@
 
 import Foundation
 
-#warning("temporary, don't hardcode long term")
-let token = "2e3407cc33caffcbd5a093535ac42d1244b779be"
-
 struct GitHub {
     
     func get(url: URL,
+             parameters: [String:String] = [:],
              completion: @escaping (Result<Response, Error>) -> ()) {
         var request = URLRequest(url: url)
-        request.addValue("token \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("token \(gitHubAuthorizationToken)", forHTTPHeaderField: "Authorization")
+        
+        for (key, value) in parameters {
+            request.addValue(value, forHTTPHeaderField: key)
+        }
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
@@ -24,13 +26,26 @@ struct GitHub {
                     return
                 }
                 
-                guard let data = data, let response = response else {
+                guard let data = data, let response = response as? HTTPURLResponse else {
                     let error = GitterError.missingResponse
                     completion(.failure(error))
                     return
                 }
                 
-                completion(.success(Response(data: data, urlResponse: response as! HTTPURLResponse)))
+                if response.statusCode >= 400 {
+                    let json = try? JSONSerialization.jsonObject(with: data) as? [String:Any]
+                    var message = json?["message"] as? String ?? "Something went wrong"
+                    
+                    if message == "Bad credentials", gitHubAuthorizationToken.isEmpty {
+                        message = "Bad credentials.\nDouble-check your token in 'AuthorizationToken.swift'"
+                    }
+                    
+                    let error = GitterError.serverError(response.statusCode, message)
+                    completion(.failure(error))
+                    return
+                }
+                
+                completion(.success(Response(data: data, urlResponse: response)))
             }
         }
         
@@ -38,13 +53,14 @@ struct GitHub {
     }
     
     func get(urlString: String,
+             parameters: [String:String] = [:],
              completion: @escaping (Result<Response, Error>) -> ()) {
         guard let url = URL(string: urlString) else {
             completion(.failure(GitterError.invalidURL))
             return
         }
         
-        get(url: url, completion: completion)
+        get(url: url, parameters: parameters, completion: completion)
     }
     
 }

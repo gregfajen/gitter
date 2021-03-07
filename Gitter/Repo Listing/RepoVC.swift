@@ -24,6 +24,8 @@ class RepoVC: UITableViewController {
         repoResource.pulls.whenSuccess { _ in
             self.tableView.reloadData()
         }
+        
+        repoResource.pulls.whenFailure(presentErrorAlert)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,6 +49,23 @@ class RepoVC: UITableViewController {
         let vc = storyboard.instantiateViewController(identifier: "FilesVC") as! FilesVC
         vc.pull = pull
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+
+extension UIViewController {
+    
+    func presentErrorAlert(error: Error) {
+        let title = "Error"
+        let message = (error as? LocalizedError)?.errorDescription ?? "An unknown error occurred."
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(.init(title: "OK", style: .default, handler: nil))
+        
+        present(alert, animated: true)
     }
     
 }

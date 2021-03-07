@@ -91,6 +91,21 @@ extension Resource {
         return resource
     }
     
+    func mapError(_ closure: @escaping (Error) throws -> Value) -> Resource<Value> {
+        let resource = Resource<Value>()
+        
+        whenComplete { result in
+            switch result {
+                case .success(let value):
+                    resource.succeed(with: value)
+                case .failure(let error):
+                    resource.succeed { try closure(error) }
+            }
+        }
+        
+        return resource
+    }
+    
     func and<T>(_ other: Resource<T>) -> Resource<(Value, T)> {
         let resource = Resource<(Value, T)>()
         
@@ -146,6 +161,13 @@ extension Result {
                 
             case .failure(let error):
                 return error
+        }
+    }
+    
+    func unwrap() throws -> Success {
+        switch self {
+            case .success(let value): return value
+            case .failure(let error): throw error
         }
     }
     

@@ -30,7 +30,9 @@ extension PullsResource {
     convenience init(_ repo: Repo) {
         self.init()
         
-        GitHub().get(urlString: "https://api.github.com/repos/\(repo.fullName)/pulls") { result in
+        let urlString = "https://api.github.com/repos/\(repo.fullName)/pulls?per_page=100&state=open"
+        
+        GitHub().get(urlString: urlString) { result in
             self.complete {
                 try result.map { response in
                     try response

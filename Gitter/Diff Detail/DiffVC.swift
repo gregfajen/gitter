@@ -18,6 +18,7 @@ class DiffVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         title = file.filename
         diffResource.whenSuccess(didLoad(diff:))
+        diffResource.whenFailure(presentErrorAlert)
     }
     
     func didLoad(diff: Diff) {

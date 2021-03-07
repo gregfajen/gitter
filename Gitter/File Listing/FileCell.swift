@@ -20,6 +20,7 @@ class FileCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         textLabel?.text = file?.shape.filename
+        detailTextLabel?.text = file?.status.rawValue
     }
     
 }

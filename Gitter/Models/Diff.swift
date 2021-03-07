@@ -20,4 +20,12 @@ class Diff {
         self.after = after
     }
     
+    var linesAdded: Int {
+        hunks.map(\.linesAdded).reduce(0, +)
+    }
+    
+    var linesRemoved: Int {
+        hunks.map(\.linesRemoved).reduce(0, +)
+    }
+    
 }

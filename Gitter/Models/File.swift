@@ -53,7 +53,7 @@ class File {
     
     func resource(for commit: String) -> Resource<[String]> {
         let resource = Resource<[String]>()
-        let urlString = "https://raw.githubusercontent.com/\(pull.repo.fullName)/\(commit)/\(filename)"
+        let urlString = "https://raw.githubusercontent.com/\(pull.repo.fullName)/\(commit)/\(filename.escaped)"
         
         GitHub().get(urlString: urlString) { result in
             switch result {
@@ -81,7 +81,15 @@ class File {
             }
         }
         
-        return resource
+        return resource.mapError { error -> [String] in
+            if case let .serverError(code, _) = (error as? GitterError) {
+                if code == 404 {
+                    return []
+                }
+            }
+            
+            throw error
+        }
     }
     
 }
@@ -93,15 +101,44 @@ extension FilesResource {
     convenience init(_ pull: Pull) {
         self.init()
         
-        GitHub().get(urlString: "https://api.github.com/repos/\(pull.repo.fullName)/pulls/\(pull.number)/files") { result in
-                self.complete {
-                    try result.map { response in
-                        try response
-                            .decoding([GitFileShape].self)
-                            .map { File(pull: pull, shape: $0) }
-                    }
+        getFiles(pull: pull)
+    }
+    
+    func getFiles(pull: Pull, page: Int = 1, previousFiles: [File] = []) {
+        let urlString = "https://api.github.com/repos/\(pull.repo.fullName)/pulls/\(pull.number)/files?per_page=100&page=\(page)"
+        
+        GitHub().get(urlString: urlString) { result in
+            do {
+                let files = try result.map { response in
+                    try response
+                        .decoding([GitFileShape].self)
+                        .map { File(pull: pull, shape: $0) }
+                }.unwrap()
+                
+                print("PAGE \(page): \(files.count) files")
+                if files.count == 100 {
+                    self.getFiles(pull: pull, page: page + 1, previousFiles: previousFiles + files)
+                } else {
+                    self.succeed(with: previousFiles + files)
                 }
+                
+            } catch {
+                if previousFiles.isEmpty {
+                    self.fail(with: error)
+                } else {
+                    self.succeed(with: previousFiles)
+                }
+            }
         }
+        
+    }
+    
+}
+
+extension String {
+    
+    var escaped: String {
+        (self as NSString).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? self
     }
     
 }

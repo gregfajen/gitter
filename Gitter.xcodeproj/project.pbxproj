@@ -37,6 +37,7 @@
 		37DE141425F4787A00CD7397 /* ChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141325F4787A00CD7397 /* ChangeView.swift */; };
 		37DE141825F478B300CD7397 /* DiffSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141725F478B300CD7397 /* DiffSectionTests.swift */; };
 		37DE141C25F47A7300CD7397 /* ResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141B25F47A7300CD7397 /* ResourceTests.swift */; };
+		37DE142025F499FB00CD7397 /* AuthorizationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141F25F499FB00CD7397 /* AuthorizationToken.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		37DE141325F4787A00CD7397 /* ChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeView.swift; sourceTree = "<group>"; };
 		37DE141725F478B300CD7397 /* DiffSectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffSectionTests.swift; sourceTree = "<group>"; };
 		37DE141B25F47A7300CD7397 /* ResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceTests.swift; sourceTree = "<group>"; };
+		37DE141F25F499FB00CD7397 /* AuthorizationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 		37C6914125F07F8600101AD4 /* Gitter */ = {
 			isa = PBXGroup;
 			children = (
+				37DE141F25F499FB00CD7397 /* AuthorizationToken.swift */,
 				37C6918325F1E70D00101AD4 /* Repo Listing */,
 				37A9420B25F3EF9000F6B4BE /* File Listing */,
 				37A9421525F3F6AD00F6B4BE /* Diff Detail */,
@@ -329,6 +332,7 @@
 				37C6914525F07F8600101AD4 /* SceneDelegate.swift in Sources */,
 				37CECD5725F2116C00C40859 /* File.swift in Sources */,
 				37A9421F25F3FAD700F6B4BE /* Errors.swift in Sources */,
+				37DE142025F499FB00CD7397 /* AuthorizationToken.swift in Sources */,
 				37A9422325F4018D00F6B4BE /* Hunk.swift in Sources */,
 				37C6918D25F1E77900101AD4 /* Resource.swift in Sources */,
 			);
@@ -426,7 +430,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -481,7 +485,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
