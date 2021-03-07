@@ -7,4 +7,10 @@
 
 import Foundation
 
-let gitHubAuthorizationToken = "2e3407cc33caffcbd5a093535ac42d1244b779be"
+// Enter a GitHub Personal Access Token here:
+let gitHubAuthorizationToken = ""
+
+// https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+
+// NOTE: Initially I had planned to implement OAuth, but setting up a GitHub app proved tedious
+//       and not strictly related to iOS development. Apologies for the inconvenience.
