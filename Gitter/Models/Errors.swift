@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GitterError: LocalizedError {
+enum GitterError: LocalizedError, Equatable {
     
     case serverError(Int, String)
     case missingResponse
