@@ -104,6 +104,9 @@ extension FilesResource {
         getFiles(pull: pull)
     }
     
+    // quick and dirty pagination
+    // in a real app we'd ideally show the first page, and potentially
+    // only load the rest of the results as needed (ie, when we scroll down)
     func getFiles(pull: Pull, page: Int = 1, previousFiles: [File] = []) {
         let urlString = "https://api.github.com/repos/\(pull.repo.fullName)/pulls/\(pull.number)/files?per_page=100&page=\(page)"
         

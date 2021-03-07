@@ -18,6 +18,9 @@ class PullCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
+        accessoryType = .disclosureIndicator
+        imageView?.tintColor = .systemBlue
+        imageView?.image = UIImage(named: "pull")?.withRenderingMode(.alwaysTemplate)
         textLabel?.text = pull?.shape.title
         detailTextLabel?.text = pull?.shape.body
     }

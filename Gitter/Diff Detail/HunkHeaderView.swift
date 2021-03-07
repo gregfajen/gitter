@@ -18,19 +18,28 @@ class HunkHeaderView: UIView {
         self.oldLineRange = section.oldLineRange
         self.newLineRange = section.newLineRange
         
-        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 60))
+        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         
-        self.backgroundColor = UIColor(white: 0.5, alpha: 0.2)
+        self.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    var leftMargin: CGFloat {
+        if UIDevice.current.orientation.isLandscape {
+            return 60
+        } else {
+            return 10
+        }
+    }
     
     override func layoutSubviews() {
-        label.frame = bounds.insetBy(dx: 10, dy: 0)
-        label.font = .boldSystemFont(ofSize: 14)
+        label.frame = CGRect(x: leftMargin, y: bounds.size.height - 30, width: 300, height: 30)
+        label.font = UIFont(name: "Courier Bold", size: 14)
         label.text = string
+        label.textColor = .label
         addSubview(label)
     }
     

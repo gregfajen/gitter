@@ -14,16 +14,20 @@ class DiffVC: UITableViewController {
     var diff: Diff? { diffResource.value }
     var sections = [DiffSection]()
     var sectionHeaders = [HunkHeaderView]()
+    var sectionFooters = [HunkFooterView]()
     
     override func viewWillAppear(_ animated: Bool) {
         title = file.filename
         diffResource.whenSuccess(didLoad(diff:))
         diffResource.whenFailure(presentErrorAlert)
+        
+        tableView.backgroundColor = .systemGray6
     }
     
     func didLoad(diff: Diff) {
         sections = diff.hunks.map(DiffSection.init)
         sectionHeaders = sections.map(HunkHeaderView.init)
+        sectionFooters = sections.map { _ in HunkFooterView() }
         
         tableView.reloadData()
     }
@@ -34,6 +38,21 @@ class DiffVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         sectionHeaders[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 48
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = sectionFooters[section]
+        footer.isLast = section == sectionFooters.count - 1
+        return footer
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let isLast = section == sectionFooters.count - 1
+        return isLast ? 0 : 16
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

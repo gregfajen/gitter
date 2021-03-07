@@ -38,6 +38,7 @@
 		37DE141825F478B300CD7397 /* DiffSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141725F478B300CD7397 /* DiffSectionTests.swift */; };
 		37DE141C25F47A7300CD7397 /* ResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141B25F47A7300CD7397 /* ResourceTests.swift */; };
 		37DE142025F499FB00CD7397 /* AuthorizationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE141F25F499FB00CD7397 /* AuthorizationToken.swift */; };
+		37DE143225F4AE0000CD7397 /* HunkFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE143125F4AE0000CD7397 /* HunkFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		37DE141725F478B300CD7397 /* DiffSectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffSectionTests.swift; sourceTree = "<group>"; };
 		37DE141B25F47A7300CD7397 /* ResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceTests.swift; sourceTree = "<group>"; };
 		37DE141F25F499FB00CD7397 /* AuthorizationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationToken.swift; sourceTree = "<group>"; };
+		37DE143125F4AE0000CD7397 /* HunkFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunkFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			children = (
 				37A9421625F3F6C200F6B4BE /* DiffVC.swift */,
 				37A9423025F443A300F6B4BE /* HunkHeaderView.swift */,
+				37DE143125F4AE0000CD7397 /* HunkFooterView.swift */,
 				37A9422825F410A500F6B4BE /* ChangeCell.swift */,
 				37DE141325F4787A00CD7397 /* ChangeView.swift */,
 				37DE140D25F4781200CD7397 /* DiffSection.swift */,
@@ -322,6 +325,7 @@
 				37DE140E25F4781200CD7397 /* DiffSection.swift in Sources */,
 				37A9420E25F3EFDE00F6B4BE /* FilesVC.swift in Sources */,
 				37DE141425F4787A00CD7397 /* ChangeView.swift in Sources */,
+				37DE143225F4AE0000CD7397 /* HunkFooterView.swift in Sources */,
 				37C6917F25F1C92600101AD4 /* GitHubShapes.swift in Sources */,
 				37A9421725F3F6C200F6B4BE /* DiffVC.swift in Sources */,
 				37CECD6625F2269100C40859 /* MyersDiff.swift in Sources */,

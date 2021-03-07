@@ -42,7 +42,7 @@ class ChangeCell: UITableViewCell {
         right.autoresizingMask = [.flexibleLeftMargin, .flexibleWidth, .flexibleHeight]
         addSubview(right)
         
-        rule.backgroundColor = UIColor.systemGray2
+        rule.backgroundColor = UIColor.systemGray3
         rule.frame = CGRect(x: round(rect.size.width - 0.5),
                             y: 0,
                             width: 1,

@@ -39,7 +39,18 @@ class ChangeView: UIView {
     
     // MARK: Layout
     
-    var margin: CGFloat { 10 }
+    var outerMargin: CGFloat {
+        if UIDevice.current.orientation.isLandscape {
+            return 60
+        } else {
+            return 20
+        }
+    }
+    
+    var innerMargin: CGFloat { 20 }
+    
+    var leftMargin: CGFloat { isNew ? innerMargin : outerMargin }
+    var rightMargin: CGFloat { isNew ? outerMargin : innerMargin }
     
     var lineNumberWidth: CGFloat {
         let oldLineCount = diff?.before.count ?? 0
@@ -66,24 +77,24 @@ class ChangeView: UIView {
     }
     
     var lineNumberRect: CGRect {
-        CGRect(x: margin,
+        CGRect(x: leftMargin,
                y: textOffset,
                width: lineNumberWidth,
                height: .greatestFiniteMagnitude)
     }
     
     var changeRect: CGRect {
-        CGRect(x: margin + lineNumberWidth,
+        CGRect(x: leftMargin + lineNumberWidth,
                y: textOffset,
                width: changeWidth,
                height: .greatestFiniteMagnitude)
     }
     
     var textRect: CGRect {
-        let x = margin + lineNumberWidth + changeWidth
+        let x = leftMargin + lineNumberWidth + changeWidth
         return CGRect(x: x,
                       y: textOffset,
-                      width: bounds.width - x - margin,
+                      width: bounds.width - x - rightMargin,
                       height: .greatestFiniteMagnitude)
     }
     
@@ -93,7 +104,7 @@ class ChangeView: UIView {
                                                options: [.usesLineFragmentOrigin, .usesFontLeading],
                                                context: nil).height ?? 0
         
-        return x
+        return round(x)
     }
     
     // MARK: Text
