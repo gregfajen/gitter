@@ -10,6 +10,7 @@ import Foundation
 // Enter a GitHub Personal Access Token here:
 let gitHubAuthorizationToken = ""
 
+// https://github.com/settings/tokens
 // https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
 // NOTE: Initially I had planned to implement OAuth, but setting up a GitHub app proved tedious
