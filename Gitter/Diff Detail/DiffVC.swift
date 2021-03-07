@@ -13,19 +13,26 @@ class DiffVC: UITableViewController {
     lazy var diffResource = file.diffResource
     var diff: Diff? { diffResource.value }
     var sections = [DiffSection]()
+    var sectionHeaders = [HunkHeaderView]()
     
     override func viewWillAppear(_ animated: Bool) {
         title = file.filename
+        diffResource.whenSuccess(didLoad(diff:))
+    }
+    
+    func didLoad(diff: Diff) {
+        sections = diff.hunks.map(DiffSection.init)
+        sectionHeaders = sections.map(HunkHeaderView.init)
         
-        diffResource.whenSuccess { diff in
-            self.sections = diff.hunks.map(DiffSection.init)
-            self.printDiff(diff)
-            self.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        sectionHeaders[section]
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,34 +56,6 @@ class DiffVC: UITableViewController {
             view.frame.size.width = tableView.frame.size.width / 2
             return view.desiredHeight
         }.max() ?? 0
-    }
-    
-    func printDiff(_ diff: Diff) {
-        let hunks = diff.diff.hunked()
-        let old = diff.before
-        let new = diff.after
-        
-        for hunk in hunks {
-            print("")
-            print("")
-            print("")
-            
-            for change in hunk.changes {
-                switch change {
-                    case .insert(let targetLine):
-                        let line = new[targetLine]
-                        print(" + \(line)")
-                    case .remove(let sourceLine):
-                        let line = old[sourceLine]
-                        print(" - \(line)")
-                    case .equal(let sourceLines, _):
-                        for sourceLine in sourceLines {
-                            let line = old[sourceLine]
-                            print("   \(line)")
-                        }
-                }
-            }
-        }
     }
     
 }

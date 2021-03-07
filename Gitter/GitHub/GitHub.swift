@@ -18,11 +18,6 @@ struct GitHub {
         request.addValue("token \(token)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            print(String(describing: data))
-            print(String(describing: response))
-            print(String(describing: error))
-            print("")
-            
             DispatchQueue.main.async {
                 if let error = error {
                     completion(.failure(error))
@@ -35,9 +30,8 @@ struct GitHub {
                     return
                 }
                 
-                completion(.success(Response(data: data, urlResponse: response)))
+                completion(.success(Response(data: data, urlResponse: response as! HTTPURLResponse)))
             }
-            
         }
         
         task.resume()
@@ -58,7 +52,7 @@ struct GitHub {
 struct Response {
     
     let data: Data
-    let urlResponse: URLResponse
+    let urlResponse: HTTPURLResponse
     
     var string: String {
         String(data: data, encoding: .utf8) ?? ""

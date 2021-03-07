@@ -12,8 +12,14 @@ class File {
     let pull: Pull
     let shape: GitFileShape
     
-    lazy var beforeResource: Resource<[String]> = resource(for: pull.shape.base.sha)
-    lazy var afterResource: Resource<[String]>  = resource(for: pull.shape.head.sha)
+    var status: Status { Status(rawValue: shape.status) ?? .unknown }
+    
+    enum Status: String {
+        case renamed, modified, added, removed, unknown
+    }
+    
+    lazy var beforeResource: Resource<[String]> = makeBeforeResource()
+    lazy var afterResource: Resource<[String]> = makeAfterResource()
     lazy var diffResource = beforeResource.and(afterResource).map(Diff.init)
     
     init(pull: Pull, shape: GitFileShape) {
@@ -23,21 +29,51 @@ class File {
     
     var filename: String { shape.filename }
     
+    var emptyResource: Resource<[String]> {
+        let resource = Resource<[String]>()
+        resource.succeed(with: [])
+        return resource
+    }
+    
+    func makeBeforeResource() -> Resource<[String]> {
+        if status == .added {
+            return emptyResource
+        } else {
+            return resource(for: pull.shape.base.sha)
+        }
+    }
+    
+    func makeAfterResource() -> Resource<[String]> {
+        if status == .removed {
+            return emptyResource
+        } else {
+            return resource(for: pull.shape.head.sha)
+        }
+    }
+    
     func resource(for commit: String) -> Resource<[String]> {
         let resource = Resource<[String]>()
-        let urlString = "https://api.github.com/repos/\(pull.repo.fullName)/contents/\(filename)?ref=\(commit)"
+        let urlString = "https://raw.githubusercontent.com/\(pull.repo.fullName)/\(commit)/\(filename)"
         
         GitHub().get(urlString: urlString) { result in
             switch result {
                 case .success(let response):
                     resource.succeed {
-                        let json = try JSONSerialization.jsonObject(with: response.data, options: []) as! [String:Any]
-                        guard let content = (json["content"] as? String)?.replacingOccurrences(of: "\n", with: "") else {
+                        guard response.urlResponse.statusCode == 200 else {
                             return []
                         }
-                        let decoded = Data(base64Encoded: content)!
-                        let string = String(data: decoded, encoding: .utf8)!
-                        return string.components(separatedBy: .newlines)
+                        
+                        if let string = String(data: response.data, encoding: .utf8) {
+                            var lines = string
+                                .replacingOccurrences(of: "\r", with: "")
+                                .components(separatedBy: "\n")
+                            while let last = lines.last, last.isEmpty {
+                                lines.removeLast()
+                            }
+                            return lines
+                        } else {
+                            return []
+                        }
                     }
                     
                 case .failure(let error):
@@ -46,7 +82,6 @@ class File {
         }
         
         return resource
-//
     }
     
 }

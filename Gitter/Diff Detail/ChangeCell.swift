@@ -109,10 +109,9 @@ enum DiffLine {
     
     var prefix: String {
         switch self {
-            case .none: return ""
-            case .unchanged: return "   "
-            case .insert: return " + "
-            case .remove: return " - "
+            case .none, .unchanged: return ""
+            case .insert: return "+"
+            case .remove: return "-"
         }
     }
     
@@ -122,6 +121,7 @@ class ChangeCell: UITableViewCell {
     
     let left = ChangeView()
     let right = ChangeView()
+    let rule = UIView()
     
     var diff: Diff? {
         didSet {
@@ -151,6 +151,14 @@ class ChangeCell: UITableViewCell {
         right.frame = rect
         right.autoresizingMask = [.flexibleLeftMargin, .flexibleWidth, .flexibleHeight]
         addSubview(right)
+        
+        rule.backgroundColor = UIColor.systemGray2
+        rule.frame = CGRect(x: round(rect.size.width - 0.5),
+                            y: 0,
+                            width: 1,
+                            height: rect.size.height)
+        rule.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleHeight]
+        addSubview(rule)
     }
     
 }
@@ -165,13 +173,21 @@ class ChangeView: UIView {
             setNeedsDisplay()
         }
     }
-    var lineNumber: Int? { line?.lineNumber }
+    var lineNumber: Int? { line?.lineNumber } // ZERO-INDEXED
     
     override func layoutSubviews() {
         backgroundColor = line?.backgroundColor ?? .clear
     }
     
     override func draw(_ rect: CGRect) {
+        lineNumberString?.draw(with: lineNumberRect,
+                               options: [.usesLineFragmentOrigin, .usesFontLeading],
+                               context: nil)
+        
+        changeString?.draw(with: changeRect,
+                           options: [.usesLineFragmentOrigin, .usesFontLeading],
+                           context: nil)
+        
         attributedString?.draw(with: textRect,
                                options: [.usesLineFragmentOrigin, .usesFontLeading],
                                context: nil)
@@ -181,23 +197,50 @@ class ChangeView: UIView {
     
     var margin: CGFloat { 10 }
     
-    var lineCountWidth: CGFloat {
-        0
+    var lineNumberWidth: CGFloat {
+        let oldLineCount = diff?.before.count ?? 0
+        let newLineCount = diff?.after.count ?? 0
+        let maxLineCount = max(oldLineCount, newLineCount)
+        let string = NSAttributedString(string: "\(maxLineCount)", attributes: attributes())
+        return ceil(string.size().width)
     }
     
-    var changeX: CGFloat {
-        0
+    var changeWidth: CGFloat {
+        30
     }
     
     var textMargin: CGFloat {
         60
     }
     
-    var textRect: CGRect {
-        CGRect(x: 30,
-               y: 0,
-               width: bounds.width - 40,
+    var lineHeightMultiple: CGFloat {
+        1.4
+    }
+    
+    var textOffset: CGFloat {
+        -2.5
+    }
+    
+    var lineNumberRect: CGRect {
+        CGRect(x: margin,
+               y: textOffset,
+               width: lineNumberWidth,
                height: .greatestFiniteMagnitude)
+    }
+    
+    var changeRect: CGRect {
+        CGRect(x: margin + lineNumberWidth,
+               y: textOffset,
+               width: changeWidth,
+               height: .greatestFiniteMagnitude)
+    }
+    
+    var textRect: CGRect {
+        let x = margin + lineNumberWidth + changeWidth
+        return CGRect(x: x,
+                      y: textOffset,
+                      width: bounds.width - x - margin,
+                      height: .greatestFiniteMagnitude)
     }
     
     var desiredHeight: CGFloat {
@@ -223,25 +266,47 @@ class ChangeView: UIView {
         }
     }
     
-    func attributes(color: UIColor, alignment: NSTextAlignment = .left) -> [NSAttributedString.Key:Any] {
+    func attributes(color: UIColor = .label,
+                    alignment: NSTextAlignment = .left) -> [NSAttributedString.Key:Any] {
         [
             .font: font,
             .foregroundColor: color,
-            .paragraphStyle: NSParagraphStyle.with(alignment: alignment)
+            .paragraphStyle: NSParagraphStyle.with(alignment: alignment,
+                                                   lineHeightMultiple: lineHeightMultiple)
         ]
     }
     
     var attributedString: NSAttributedString? {
-        text.map { NSAttributedString(string: $0, attributes: attributes(color: .label)) }
+        text.map {
+            NSAttributedString(string: $0,
+                               attributes: attributes(color: .label))
+        }
+    }
+    
+    var lineNumberString: NSAttributedString? {
+        lineNumber.map {
+            NSAttributedString(string: "\($0+1)",
+                               attributes: attributes(color: .secondaryLabel,
+                                                      alignment: .right))
+        }
+    }
+    
+    var changeString: NSAttributedString? {
+        line.map {
+            NSAttributedString(string: $0.prefix,
+                               attributes: attributes(color: .label,
+                                                      alignment: .center))
+        }
     }
     
 }
 
 extension NSParagraphStyle {
     
-    static func with(alignment: NSTextAlignment) -> NSParagraphStyle {
+    static func with(alignment: NSTextAlignment, lineHeightMultiple: CGFloat) -> NSParagraphStyle {
         let style = NSMutableParagraphStyle()
         style.alignment = alignment
+        style.lineHeightMultiple = lineHeightMultiple
         return style
     }
     
